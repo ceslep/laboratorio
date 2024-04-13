@@ -6,9 +6,15 @@ import 'package:laboratorio/providers/hrayto_provider.dart';
 import 'package:provider/provider.dart';
 
 class FormHemograma extends StatefulWidget {
+  final String identificacion;
+  final String fecha;
   final List<Map<String, dynamic>> hemograma;
 
-  const FormHemograma({super.key, required this.hemograma});
+  const FormHemograma(
+      {super.key,
+      required this.hemograma,
+      required this.identificacion,
+      required this.fecha});
 
   @override
   State<FormHemograma> createState() => _FormHemogramaState();
@@ -92,6 +98,8 @@ class _FormHemogramaState extends State<FormHemograma> {
       hraytoProvider.hrayto.pCT = pctController.text;
       pLcrController.text = widget.hemograma[19]['P-LCR'].toString();
       hraytoProvider.hrayto.pLCR = pLcrController.text;
+      hraytoProvider.hrayto.identificacion = widget.identificacion;
+      hraytoProvider.hrayto.fecha = widget.fecha;
       setState(() {});
     }
     formFields = [

@@ -109,7 +109,7 @@ Future<HemogramaRayto> getHemogramaRayto(
   }
 }
 
-Future<void> gurdarHemograma(BuildContext context, HRayto hrayto) async {
+Future<void> guardarHemograma(BuildContext context, HRayto hrayto) async {
   final urlProvider = Provider.of<UrlProvider>(context, listen: false);
   final Uri url = Uri.parse('${urlProvider.url}getExamenesPaciente.php');
   late final http.Response response;

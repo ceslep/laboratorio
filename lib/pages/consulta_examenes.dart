@@ -13,8 +13,11 @@ class ConsultaExamenes extends StatefulWidget {
   final String paciente;
   final String nombres;
 
-  const ConsultaExamenes(
-      {super.key, required this.paciente, required this.nombres});
+  const ConsultaExamenes({
+    super.key,
+    required this.paciente,
+    required this.nombres,
+  });
 
   @override
   State<ConsultaExamenes> createState() => _ConsultaExamenesState();
@@ -182,7 +185,7 @@ class _ConsultaExamenesState extends State<ConsultaExamenes> {
                       ),
                       trailing: IconButton(
                         onPressed: () {
-                          viewExam(context, codexamen, ind);
+                          viewExam(context, codexamen, ind, fecha);
                         },
                         icon: const Icon(
                           Icons.remove_red_eye,
@@ -223,7 +226,7 @@ class _ConsultaExamenesState extends State<ConsultaExamenes> {
     );
   }
 
-  void viewExam(BuildContext context, String codigo, String ind) {
+  void viewExam(BuildContext context, String codigo, String ind, String fecha) {
     if (codigo == '3000' || codigo == '3001') {
       getHemogramaRayto(context, ind: ind).then((HemogramaRayto value) {
         HemogramaRayto hemograma = value;
@@ -231,7 +234,11 @@ class _ConsultaExamenesState extends State<ConsultaExamenes> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ViewHemogramaRayto(hemograma: hemograma),
+              builder: (context) => ViewHemogramaRayto(
+                hemograma: hemograma,
+                identificacion: widget.paciente,
+                fecha: fecha,
+              ),
             ),
           );
         } else {

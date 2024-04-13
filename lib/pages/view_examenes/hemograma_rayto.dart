@@ -2,15 +2,23 @@
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:laboratorio/api/api_laboratorio.dart';
 import 'package:laboratorio/functions/show_toast.dart';
 import 'package:laboratorio/models/hemograma_rayto.dart';
-import 'package:laboratorio/pages/view_examenes/form/form_hemograma.dart';
+import 'package:laboratorio/pages/view_examenes/form_hemograma/form_hemograma.dart';
 import 'package:laboratorio/providers/hrayto_provider.dart';
 import 'package:provider/provider.dart';
 
 class ViewHemogramaRayto extends StatefulWidget {
   final HemogramaRayto hemograma;
-  const ViewHemogramaRayto({super.key, required this.hemograma});
+  final String identificacion;
+  final String fecha;
+  const ViewHemogramaRayto({
+    super.key,
+    required this.hemograma,
+    required this.identificacion,
+    required this.fecha,
+  });
 
   @override
   State<ViewHemogramaRayto> createState() => _ViewHemogramaRaytoState();
@@ -84,9 +92,7 @@ class _ViewHemogramaRaytoState extends State<ViewHemogramaRayto> {
             padding: const EdgeInsets.all(8),
             child: IconButton(
               onPressed: () {
-                for (var property in hraytoProvider.hrayto.publicProperties) {
-                  print('Property: $property');
-                }
+                guardarHemograma(context, hraytoProvider.hrayto);
               },
               icon: const Icon(
                 Icons.save,
@@ -98,6 +104,8 @@ class _ViewHemogramaRaytoState extends State<ViewHemogramaRayto> {
       ),
       body: FormHemograma(
         hemograma: dataHemograma,
+        identificacion: widget.identificacion,
+        fecha: widget.hemograma.fecha!,
       ),
     );
   }
